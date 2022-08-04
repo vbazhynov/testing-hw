@@ -47,7 +47,7 @@ class CartParser {
       validationErrors = this.validate(contents);
 
     if (validationErrors.length > 0) {
-      //console.error(validationErrors);
+      console.error(validationErrors);
       throw Error("Validation failed!");
     }
 

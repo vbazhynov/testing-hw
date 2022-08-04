@@ -9,7 +9,7 @@ const pathToCardWithInvalidRows = basePath + "samples/invalidRowCard.csv";
 const pathToCardWithEmptyCell = basePath + "samples/emptyCellCard.csv";
 const pathToCardWithNegativeNumber =
   basePath + "samples/negativeNumberCell.csv";
-const pathToCardWithNaNCell = basePath + "samples/NaNCellCard.csv";
+const pathToWrongHeaderNameCard = basePath + "samples/wrongHeaderNameCard.csv";
 
 let parser;
 
@@ -89,6 +89,18 @@ describe("CartParser - unit tests", () => {
         ),
         row: expect.any(Number),
         type: "row",
+      },
+    ]);
+  });
+
+  it("should return an array with Error about wrong header name", () => {
+    const content = parser.readFile(pathToWrongHeaderNameCard);
+    expect(parser.validate(content)).toEqual([
+      {
+        column: expect.any(Number),
+        message: expect.stringContaining("Expected header to be named"),
+        row: expect.any(Number),
+        type: "header",
       },
     ]);
   });
